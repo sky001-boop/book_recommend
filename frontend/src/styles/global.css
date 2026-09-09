@@ -1,0 +1,190 @@
+/* ===== BookRec 全局主题 ===== */
+:root {
+    --primary: #6B4226;
+    --primary-light: #8B6914;
+    --accent: #B8860B;
+    --accent-light: #D4A843;
+    --bg: #FAF7F2;
+    --bg-card: #FFFFFF;
+    --text: #2C2416;
+    --text-secondary: #8B7355;
+    --text-muted: #B5A48B;
+    --border: #E8DED1;
+    --success: #5B8C5A;
+    --danger: #C0392B;
+    --shadow: 0 2px 12px rgba(107, 66, 38, 0.06);
+    --shadow-hover: 0 12px 36px rgba(107, 66, 38, 0.12);
+    --shadow-lg: 0 20px 60px rgba(107, 66, 38, 0.10);
+    --radius: 14px;
+    --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --font-serif: 'Georgia', 'Noto Serif SC', 'Source Han Serif SC', 'STSong', serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'PingFang SC', 'Microsoft YaHei', 'Helvetica Neue', sans-serif;
+    background-color: #F2ECE0;
+    /* 纸张纹理 + 暖光 */
+    background-image:
+        radial-gradient(ellipse 70% 50% at 50% 0%, rgba(184,134,11,0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 30% at 90% 100%, rgba(107,66,38,0.05) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Ccircle cx='15' cy='15' r='1' fill='%236B4226' fill-opacity='0.04'/%3E%3Ccircle cx='55' cy='35' r='0.8' fill='%236B4226' fill-opacity='0.03'/%3E%3Ccircle cx='35' cy='65' r='0.6' fill='%236B4226' fill-opacity='0.03'/%3E%3Ccircle cx='70' cy='70' r='0.5' fill='%238B6914' fill-opacity='0.02'/%3E%3Ccircle cx='5' cy='50' r='0.7' fill='%238B6914' fill-opacity='0.02'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* 半透明毛玻璃卡片效果 */
+.el-card,
+.book-card,
+.detail-layout,
+.form-card {
+    backdrop-filter: blur(2px);
+}
+
+/* 卡片区域保留微微露出背景 */
+.page-container {
+    position: relative;
+}
+
+/* ===== Element Plus 样式覆盖 ===== */
+:root {
+    --el-color-primary: var(--primary);
+    --el-color-primary-light-3: var(--primary-light);
+    --el-border-radius-base: 8px;
+    --el-bg-color-page: var(--bg);
+}
+
+.el-button--primary {
+    --el-button-bg-color: var(--primary);
+    --el-button-border-color: var(--primary);
+    --el-button-hover-bg-color: var(--accent);
+    --el-button-hover-border-color: var(--accent);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.el-input__wrapper {
+    box-shadow: 0 0 0 1px var(--border) inset !important;
+    border-radius: 8px !important;
+}
+.el-input__wrapper:hover {
+    box-shadow: 0 0 0 1px var(--accent) inset !important;
+}
+.el-input__wrapper.is-focus {
+    box-shadow: 0 0 0 1px var(--primary) inset !important;
+}
+
+.el-card {
+    border-radius: var(--radius) !important;
+    border: 1px solid var(--border) !important;
+    background: rgba(255,255,255,0.85) !important;
+    backdrop-filter: blur(8px);
+    transition: all var(--transition);
+}
+.el-card:hover {
+    box-shadow: var(--shadow-hover) !important;
+}
+
+.el-menu--horizontal {
+    border-bottom: 1px solid var(--border) !important;
+}
+
+.el-pagination {
+    --el-pagination-button-bg-color: var(--bg-card);
+}
+
+/* ===== 滚动条美化 ===== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--text-muted);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-secondary);
+}
+
+/* ===== 页面过渡动画 ===== */
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.25s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-up-enter-from {
+    opacity: 0;
+    transform: translateY(20px);
+}
+.slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+/* ===== 布局 ===== */
+.page-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px;
+}
+/* 区块间透气 */
+.section {
+    margin-bottom: 48px;
+}
+
+.page-header {
+    margin-bottom: 28px;
+}
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    font-family: var(--font-serif);
+    color: var(--text);
+    letter-spacing: 0.5px;
+}
+.page-header p {
+    color: var(--text-secondary);
+    margin-top: 6px;
+    font-size: 14px;
+}
+.page-header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+/* ===== 图书卡片网格 ===== */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 20px;
+}
+
+/* ===== 加载骨架屏 ===== */
+.skeleton {
+    background: linear-gradient(90deg, #f0ebe0 25%, #e8ded1 50%, #f0ebe0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+    border-radius: 8px;
+}
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}

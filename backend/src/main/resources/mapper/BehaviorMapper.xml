@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookrecommend.backend.mapper.BehaviorMapper">
+
+    <insert id="insert" parameterType="com.bookrecommend.backend.entity.Behavior">
+        INSERT INTO behavior (user_id, book_id, type)
+        VALUES (#{userId}, #{bookId}, #{type})
+    </insert>
+
+    <select id="ctrByBucket" resultType="map">
+        SELECT MOD(user_id, 2) AS bucket,
+               SUM(CASE WHEN type = 'exposure' THEN 1 ELSE 0 END) AS exposures,
+               SUM(CASE WHEN type = 'click' THEN 1 ELSE 0 END) AS clicks
+        FROM behavior
+        GROUP BY MOD(user_id, 2)
+    </select>
+
+</mapper>

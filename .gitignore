@@ -1,0 +1,36 @@
+# 密钥与本地环境
+.env
+
+# ===== 数据集（不随仓库分发，获取方式见 README「数据集」）=====
+data/*.csv
+data/dl/*.csv
+data/ml1m/*.csv
+data/import_data.sql
+data/preprocess.log
+
+# ===== 离线实验产物（可由脚本复现）=====
+data/dl/*.json
+data/dl/*.pt
+data/dl/*.onnx
+data/dl/*.data
+data/dl/*.npy
+data/dl/*.faiss
+data/ml1m/*.json
+data/ml1m/*.pt
+data/ml1m/*.onnx
+data/ml1m/*.data
+data/ml1m/*.npy
+data/ml1m/*.faiss
+
+# ===== 构建产物 =====
+backend/target/
+frontend/node_modules/
+frontend/dist/
+
+# ===== 打包文件 =====
+*.tar
+*.tar.gz
+
+# ===== IDE =====
+.idea/
+.vscode/

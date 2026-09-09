@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookrecommend.backend.mapper.BookMapper">
+
+    <select id="findAll" resultType="com.bookrecommend.backend.entity.Book">
+        SELECT b.id, b.title, b.author, b.category, b.publisher, b.isbn,
+               b.publish_year AS publishYear, b.description, b.cover, b.create_time AS createTime,
+               COALESCE(ROUND(AVG(r.score), 1), 0) AS avgRating,
+               COUNT(r.id) AS ratingCount
+        FROM book b
+        LEFT JOIN rating r ON b.id = r.book_id
+        GROUP BY b.id
+        ORDER BY b.id DESC
+    </select>
+
+    <select id="findAllSimple" resultType="com.bookrecommend.backend.entity.Book">
+        SELECT id, title, author, category, publisher, isbn,
+               publish_year AS publishYear, cover, create_time AS createTime
+        FROM book
+    </select>
+
+    <select id="findPage" resultType="com.bookrecommend.backend.entity.Book">
+        SELECT id, title, author, category, publisher, isbn,
+               publish_year AS publishYear, cover, create_time AS createTime
+        FROM book
+        ORDER BY id DESC
+        LIMIT #{offset}, #{size}
+    </select>
+
+    <select id="countAll" resultType="int">
+        SELECT COUNT(*) FROM book
+    </select>
+
+    <select id="findById" resultType="com.bookrecommend.backend.entity.Book">
+        SELECT b.id, b.title, b.author, b.category, b.publisher, b.isbn,
+               b.publish_year AS publishYear, b.description, b.cover, b.create_time AS createTime,
+               COALESCE(ROUND(AVG(r.score), 1), 0) AS avgRating,
+               COUNT(r.id) AS ratingCount
+        FROM book b
+        LEFT JOIN rating r ON b.id = r.book_id
+        WHERE b.id = #{id}
+        GROUP BY b.id
+    </select>
+
+    <select id="findByKeyword" resultType="com.bookrecommend.backend.entity.Book">
+        SELECT id, title, author, category, publisher, isbn,
+               publish_year AS publishYear, cover, create_time AS createTime
+        FROM book
+        WHERE title LIKE CONCAT('%', #{keyword}, '%')
+           OR author LIKE CONCAT('%', #{keyword}, '%')
+           OR category LIKE CONCAT('%', #{keyword}, '%')
+        LIMIT 10
+    </select>
+
+</mapper>

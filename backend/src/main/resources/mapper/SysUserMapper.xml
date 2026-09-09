@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bookrecommend.backend.mapper.SysUserMapper">
+
+
+    <insert id="insert"
+            parameterType="com.bookrecommend.backend.entity.SysUser">
+
+
+        INSERT INTO sys_user
+        (
+            username,
+            password,
+            email,
+            role
+        )
+
+        VALUES
+        (
+            #{username},
+            #{password},
+            #{email},
+            #{role}
+        )
+
+
+    </insert>
+    <select id="findByUsername"
+            resultType="com.bookrecommend.backend.entity.SysUser">
+
+        SELECT *
+        FROM sys_user
+        WHERE username=#{username}
+
+    </select>
+
+    <select id="findIdByUsername" resultType="java.lang.Long">
+
+        SELECT id
+        FROM sys_user
+        WHERE username=#{username}
+
+    </select>
+
+</mapper>

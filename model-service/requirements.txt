@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+onnxruntime
+numpy
+faiss-cpu
+sentence-transformers

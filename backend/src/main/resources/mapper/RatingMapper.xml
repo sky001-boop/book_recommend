@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookrecommend.backend.mapper.RatingMapper">
+
+    <insert id="insert" parameterType="com.bookrecommend.backend.entity.Rating">
+        INSERT INTO rating (user_id, book_id, score)
+        VALUES (#{userId}, #{bookId}, #{score})
+    </insert>
+
+    <update id="update" parameterType="com.bookrecommend.backend.entity.Rating">
+        UPDATE rating
+        SET score = #{score}
+        WHERE user_id = #{userId} AND book_id = #{bookId}
+    </update>
+
+    <select id="findByUserId" resultType="com.bookrecommend.backend.entity.Rating">
+        SELECT id, user_id AS userId, book_id AS bookId, score, create_time AS createTime
+        FROM rating
+        WHERE user_id = #{userId}
+        ORDER BY create_time DESC
+    </select>
+
+    <select id="findByBookId" resultType="com.bookrecommend.backend.entity.Rating">
+        SELECT id, user_id AS userId, book_id AS bookId, score, create_time AS createTime
+        FROM rating
+        WHERE book_id = #{bookId}
+    </select>
+
+    <select id="findAll" resultType="com.bookrecommend.backend.entity.Rating">
+        SELECT id, user_id AS userId, book_id AS bookId, score, create_time AS createTime
+        FROM rating
+    </select>
+
+    <select id="findByUserIdAndBookId" resultType="com.bookrecommend.backend.entity.Rating">
+        SELECT id, user_id AS userId, book_id AS bookId, score, create_time AS createTime
+        FROM rating
+        WHERE user_id = #{userId} AND book_id = #{bookId}
+    </select>
+
+    <select id="findByUserIds" resultType="com.bookrecommend.backend.entity.Rating">
+        SELECT id, user_id AS userId, book_id AS bookId, score, create_time AS createTime
+        FROM rating
+        WHERE user_id IN
+        <foreach collection="list" item="uid" open="(" separator="," close=")">
+            #{uid}
+        </foreach>
+    </select>
+
+</mapper>
